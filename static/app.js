@@ -22,6 +22,7 @@ function esc(t) {
 document.querySelectorAll(".tabs button").forEach((btn) => btn.addEventListener("click", () => {
   document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-selected", b === btn));
   ["assist", "history", "verify"].forEach((t) => { $(`#panel-${t}`).hidden = t !== btn.dataset.tab; });
+  $("#pipeline").hidden = btn.dataset.tab !== "assist";
   if (btn.dataset.tab === "history") loadHistory();
 }));
 
@@ -29,8 +30,9 @@ document.querySelectorAll(".tabs button").forEach((btn) => btn.addEventListener(
 async function init() {
   try {
     const h = await api("/api/health");
-    $("#status").textContent = `${h.engine} | storage: ${h.storage === "mongodb" ? "MongoDB" : "local file"} | ${h.faqs} FAQs`;
-  } catch { $("#status").textContent = "Server not reachable"; }
+    $("#status").textContent = `${h.engine} · ${h.storage === "mongodb" ? "MongoDB" : "Local store"} · ${h.faqs} FAQs`;
+    $("#status-wrap").classList.toggle("ai-on", !h.engine.startsWith("Offline"));
+  } catch { $("#status").textContent = "Server not reachable"; $("#status-wrap").classList.add("down"); }
   const samples = await api("/api/samples");
   const sel = $("#sample");
   samples.forEach((s) => {
@@ -98,15 +100,45 @@ function draftMeta(source, tone) {
 $("#analyze").addEventListener("click", runAnalysis);
 $("#message").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) runAnalysis(); });
 
+/* ---------- pipeline animation ---------- */
+const steps = () => [...document.querySelectorAll("#pipeline li[data-step]")];
+let pipeTimer = null;
+function pipelineStart() {
+  steps().forEach((li) => li.classList.remove("done", "active"));
+  $("#pipe-meta").textContent = "Analysing…";
+  let i = 0;
+  clearInterval(pipeTimer);
+  pipeTimer = setInterval(() => {
+    const all = steps();
+    if (i > 0 && all[i - 1]) { all[i - 1].classList.remove("active"); all[i - 1].classList.add("done"); }
+    if (all[i]) all[i].classList.add("active"); else clearInterval(pipeTimer);
+    i++;
+  }, 110);
+}
+function pipelineDone(a) {
+  clearInterval(pipeTimer);
+  steps().forEach((li) => { li.classList.remove("active"); li.classList.add("done"); });
+  const how = a.draft_source === "llm" ? "AI draft" : "Approved template";
+  $("#pipe-meta").textContent = `Done in ${a.latency_ms} ms · ${how}`;
+}
+function pipelineFail() {
+  clearInterval(pipeTimer);
+  steps().forEach((li) => li.classList.remove("active"));
+  $("#pipe-meta").textContent = "Analysis failed";
+}
+
 async function runAnalysis() {
   const text = $("#message").value.trim();
   if (text.length < 3) { $("#message").focus(); return; }
   const btn = $("#analyze");
   btn.disabled = true; btn.textContent = "Analysing…";
+  pipelineStart();
   try {
     current = await api("/api/analyze", { message: text, tone: toneTouched ? currentTone : null });
     render(current);
+    pipelineDone(current);
   } catch (e) {
+    pipelineFail();
     alert(`Analysis failed: ${e.message}`);
   } finally {
     btn.disabled = false; btn.textContent = "Analyse message";
@@ -151,7 +183,7 @@ function render(a) {
   else if (a.no_match_reason) { nm.hidden = false; nm.textContent = a.no_match_reason; }
   else nm.hidden = true;
   $("#clarify").hidden = !a.clarifying_question;
-  $("#clarify").textContent = a.clarifying_question ? `Ask the customer: ${a.clarifying_question}` : "";
+  $("#clarify").textContent = a.clarifying_question ? a.clarifying_question : "";
 
   // analysis column
   $("#analysis-empty").hidden = true; $("#analysis").hidden = false;
@@ -163,7 +195,7 @@ function render(a) {
   const also = $("#also");
   if (a.secondary_intent) {
     also.hidden = false;
-    also.textContent = `The customer also mentions: ${a.secondary_intent.label} (phrases: ${a.secondary_intent.evidence.join(", ")}). Handle it after this request, or analyse it separately.`;
+    also.textContent = `${a.secondary_intent.label} (phrases: ${a.secondary_intent.evidence.join(", ")}). Handle it after this one, or analyse it separately.`;
   } else also.hidden = true;
 
   const usedId = a.faq ? a.faq.id : null;
