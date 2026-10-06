@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Assist | Lotus Harbour Bank (fictional)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar" id="topbar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c3 4 3 9 0 13-3-4-3-9 0-13Zm-9 7c4 1 7 4 8 8-4-1-7-4-8-8Zm18 0c-1 4-4 7-8 8 1-4 4-7 8-8ZM5 22h22c-2 4-6 6-11 6S7 26 5 22Z"/></svg>
+      <div>
+        <strong>Lotus Harbour Bank</strong>
+        <span>Service agent assist</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" aria-selected="true" data-tab="assist" id="tab-assist">Assist</button>
+      <button role="tab" aria-selected="false" data-tab="history" id="tab-history">History</button>
+      <button role="tab" aria-selected="false" data-tab="verify" id="tab-verify">Verification</button>
+    </nav>
+    <div class="status" id="status">Connecting…</div>
+  </header>
+
+  <div class="alarm" id="alarm" hidden role="alert">
+    <div class="alarm-inner">
+      <strong id="alarm-title">Hand off to a human now</strong>
+      <span id="alarm-detail"></span>
+    </div>
+  </div>
+
+  <main>
+    <!-- ASSIST -->
+    <section id="panel-assist" class="panel-grid" role="tabpanel" aria-labelledby="tab-assist">
+      <div class="col col-message">
+        <h2>Customer message</h2>
+        <label class="field">
+          <span>Load a synthetic message</span>
+          <select id="sample"><option value="">Choose a sample…</option></select>
+        </label>
+        <label class="field">
+          <span>Message text</span>
+          <textarea id="message" rows="7" placeholder="Paste or type what the customer wrote"></textarea>
+        </label>
+        <button class="primary" id="analyze">Analyse message</button>
+        <p class="hint">Card numbers, account numbers, phone numbers and emails are masked before analysis.</p>
+
+        <div id="message-out" class="block" hidden>
+          <h3>What the assistant saw</h3>
+          <p class="masked" id="masked"></p>
+          <p class="pii" id="pii"></p>
+          <h3>Request details</h3>
+          <dl id="details" class="details"></dl>
+          <h3>Customer mood</h3>
+          <p id="mood"></p>
+        </div>
+      </div>
+
+      <div class="col col-draft">
+        <div class="draft-head">
+          <h2>Draft reply</h2>
+          <div class="tone" role="radiogroup" aria-label="Response tone">
+            <button role="radio" aria-checked="false" data-tone="concise">Concise</button>
+            <button role="radio" aria-checked="true" data-tone="standard">Standard</button>
+            <button role="radio" aria-checked="false" data-tone="empathetic">Empathetic</button>
+          </div>
+        </div>
+        <div id="empty-draft" class="empty">
+          <p>Analyse a message to get a reply drafted from approved FAQs.</p>
+          <p>You review and edit it here. Nothing is sent to the customer automatically.</p>
+        </div>
+        <div id="draft-wrap" hidden>
+          <p class="nomatch" id="nomatch" hidden></p>
+          <p class="clarify" id="clarify" hidden></p>
+          <textarea id="draft" class="letter" rows="14" aria-label="Draft reply"></textarea>
+          <p class="hint" id="draft-meta"></p>
+          <div id="compliance" class="compliance" role="status" aria-live="polite"></div>
+          <label class="field">
+            <span>Agent notes (internal)</span>
+            <input id="notes" type="text" placeholder="Optional">
+          </label>
+          <div class="actions">
+            <button class="ghost" id="copy">Copy reply</button>
+            <button class="primary" id="save">Approve and save</button>
+          </div>
+          <div id="saved" class="saved" hidden role="status">
+            <h3>Interaction summary</h3>
+            <p id="summary"></p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="col col-analysis" aria-live="polite">
+        <h2>Analysis</h2>
+        <div id="analysis-empty" class="empty"><p>Intent, sources and next steps appear here.</p></div>
+        <div id="analysis" hidden>
+          <div class="intent">
+            <p class="intent-name" id="intent-name"></p>
+            <div class="meter" aria-hidden="true"><i id="meter-fill"></i></div>
+            <p class="intent-conf" id="intent-conf"></p>
+            <p class="rationale" id="rationale"></p>
+          </div>
+          <p class="also" id="also" hidden></p>
+
+          <h3>Approved sources</h3>
+          <ol id="sources" class="sources"></ol>
+
+          <h3>Next steps for you</h3>
+          <ul id="steps" class="steps"></ul>
+
+          <h3>Documents the customer needs</h3>
+          <ul id="docs" class="docs"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="panel-history" class="wide" role="tabpanel" aria-labelledby="tab-history" hidden>
+      <div class="stats" id="stats"></div>
+      <div class="verify-head">
+        <h2>Saved interactions</h2>
+        <a class="ghost btnlink" id="export" href="/api/interactions.csv" download>Export CSV</a>
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+
+    <!-- VERIFICATION -->
+    <section id="panel-verify" class="wide" role="tabpanel" aria-labelledby="tab-verify" hidden>
+      <div class="verify-head">
+        <div>
+          <h2>Verification against labelled data</h2>
+          <p class="hint">Runs 55 labelled synthetic messages through the same pipeline: the 35-message development set the rules were built on, and a 20-message held-out set of new wordings that shows how well it generalises.</p>
+        </div>
+        <button class="primary" id="run-eval">Run verification</button>
+      </div>
+      <div id="metrics" class="metrics"></div>
+      <div class="table-wrap"><table id="eval-table" hidden>
+        <thead><tr><th>Set</th><th>ID</th><th>Message</th><th>Expected intent</th><th>Predicted</th><th>FAQ expected</th><th>FAQ predicted</th><th>Escalate</th><th>Result</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <footer>Prototype using fictional bank data only. Informational support; no authentication, transactions, balances or financial advice.</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
