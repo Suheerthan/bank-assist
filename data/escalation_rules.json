@@ -1,0 +1,94 @@
+{
+  "_note": "Configured escalation scenarios. Edit this file to add or change rules; the app reloads it on start. Patterns are case-insensitive regular expressions matched against the masked message. 'faq' (optional) is the approved article to prefer when the rule fires.",
+  "rules": [
+    {
+      "rule": "Card lost or stolen",
+      "team": "Card blocking desk",
+      "level": "critical",
+      "intent": "card_loss",
+      "faq": "FAQ-12",
+      "patterns": [
+        "\\blost\\b.*\\bcard\\b",
+        "\\bcard\\b.*\\blost\\b",
+        "\\bstolen\\b",
+        "\\bmisplac\\w*",
+        "can'?t find my card",
+        "cannot find my card",
+        "\\bdropped (?:it|my card)\\b",
+        "\\bwallet\\b.*\\b(?:stolen|lost|missing)\\b",
+        "\\bblock (?:my|the) card\\b",
+        "\\bmissing card\\b",
+        "\\bcard is gone\\b",
+        "\\bsomeone took (?:it|my card)\\b",
+        "\\bsnatch\\w*\\b",
+        "\\bpick-?pocket\\w*\\b",
+        "\\b(?:purse|bag|wallet|handbag)\\b.*\\b(?:snatched|taken|robbed|gone)\\b",
+        "\\bleft my (?:debit |credit |atm )?card\\b",
+        "\\bcard\\b.*\\bnot with me\\b"
+      ]
+    },
+    {
+      "rule": "Unauthorised transaction",
+      "team": "Fraud response team",
+      "level": "critical",
+      "intent": "suspected_fraud",
+      "faq": "FAQ-13",
+      "patterns": [
+        "\\bdid ?n[o']?t make\\b",
+        "\\bnever made\\b",
+        "\\bnot done by me\\b",
+        "\\bunauthori[sz]ed\\b",
+        "\\bsomeone (?:used|is using)\\b",
+        "\\bnot mine\\b",
+        "\\bhacked\\b",
+        "\\bfraud\\w*\\b",
+        "\\bi did not do\\b",
+        "\\b(?:don'?t|do not|didn'?t|did not) recogni[sz]e\\b",
+        "\\bunknown (?:transaction|debit|charge|payment)\\b",
+        "\\bmoney (?:is |went )?missing\\b"
+      ]
+    },
+    {
+      "rule": "Credentials shared or phishing attempt",
+      "team": "Fraud response team",
+      "level": "critical",
+      "intent": "suspected_fraud",
+      "faq": "FAQ-14",
+      "patterns": [
+        "\\b(?:shared|gave|told|disclosed|entered) (?:the |my |him |her |them )?(?:otp|pin|cvv|password)\\b",
+        "\\b(?:otp|pin|cvv)\\b.*\\b(?:shared|gave|given)\\b",
+        "\\bclaiming to be from the bank\\b",
+        "\\bphishing\\b",
+        "\\bscam\\w*\\b",
+        "\\banydesk\\b|\\bteamviewer\\b|\\bscreen ?shar\\w*",
+        "\\b(?:call\\w*|caller|asked|told)\\b.*\\binstall\\w*\\b.*\\b(?:app|software)\\b",
+        "\\bsms with a link\\b|\\bsuspicious (?:link|call|sms|message)\\b"
+      ]
+    },
+    {
+      "rule": "Card marked delivered but not received",
+      "team": "Cards operations",
+      "level": "high",
+      "intent": "card_delivery",
+      "faq": "FAQ-02",
+      "patterns": [
+        "\\bshows? delivered\\b.*\\bnot (?:received|got)\\b",
+        "\\bdelivered but\\b",
+        "\\b(?:says|shows|marked|showing|status is) (?:as )?delivered\\b.*\\b(?:never|not|didn'?t)\\b"
+      ]
+    },
+    {
+      "rule": "Address changed without request",
+      "team": "Account security",
+      "level": "high",
+      "intent": "address_update",
+      "faq": "FAQ-06",
+      "patterns": [
+        "\\baddress (?:was )?changed without\\b",
+        "\\bdid ?n[o']?t (?:request|ask).*address\\b",
+        "\\b(?:someone|somebody) (?:has )?(?:changed|updated) my (?:registered |residential )?address\\b",
+        "\\baddress\\b.*\\bchanged\\b.*\\bdid ?n[o']?t (?:request|ask|do)\\b"
+      ]
+    }
+  ]
+}

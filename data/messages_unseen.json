@@ -1,0 +1,22 @@
+[
+  {"id": "UNS-01", "text": "Got an SMS that my card was dispatched 4 days back but nothing has come to my house yet. How long does it usually take?", "expected_intent": "card_delivery", "expected_faq": "FAQ-01", "expected_escalation": false},
+  {"id": "UNS-02", "text": "The courier tracking says delivered but I never got the envelope. Nobody at home signed for it.", "expected_intent": "card_delivery", "expected_faq": "FAQ-02", "expected_escalation": true},
+  {"id": "UNS-03", "text": "what is this 499 + GST yearly charge on my credit card statement??", "expected_intent": "fee_explanation", "expected_faq": "FAQ-03", "expected_escalation": false},
+  {"id": "UNS-04", "text": "My savings account got a penalty for not maintaining average balance. How much do I need to keep?", "expected_intent": "fee_explanation", "expected_faq": "FAQ-04", "expected_escalation": false},
+  {"id": "UNS-05", "text": "Paid for a hotel in Dubai with my debit card and there is an extra cross currency fee. Why?", "expected_intent": "fee_explanation", "expected_faq": "FAQ-05", "expected_escalation": false},
+  {"id": "UNS-06", "text": "I moved house to Trichy. What documents should I give to update my communication address?", "expected_intent": "address_update", "expected_faq": "FAQ-06", "expected_escalation": false},
+  {"id": "UNS-07", "text": "Someone changed my registered address and I didn't request it. What is happening?", "expected_intent": "address_update", "expected_faq": "FAQ-06", "expected_escalation": true},
+  {"id": "UNS-08", "text": "Paid my electricity bill through UPI, it failed but 1,250 got debited. When will I get it back?", "expected_intent": "failed_transfer", "expected_faq": "FAQ-08", "expected_escalation": false},
+  {"id": "UNS-09", "text": "RTGS sent to a supplier this afternoon is still in processing status. How can I track it?", "expected_intent": "failed_transfer", "expected_faq": "FAQ-09", "expected_escalation": false},
+  {"id": "UNS-10", "text": "Need my account statement from April to September for a rental agreement.", "expected_intent": "statement_request", "expected_faq": "FAQ-10", "expected_escalation": false},
+  {"id": "UNS-11", "text": "University needs a bank-sealed statement for my education loan. How do I get one signed by the branch?", "expected_intent": "statement_request", "expected_faq": "FAQ-11", "expected_escalation": false},
+  {"id": "UNS-12", "text": "my purse got snatched in the market, my debit card was in it", "expected_intent": "card_loss", "expected_faq": "FAQ-12", "expected_escalation": true},
+  {"id": "UNS-13", "text": "I think I left my credit card at the restaurant last night, it's not with me now.", "expected_intent": "card_loss", "expected_faq": "FAQ-12", "expected_escalation": true},
+  {"id": "UNS-14", "text": "I got a debit alert for 7,800 that I don't recognise. I was asleep at that time.", "expected_intent": "suspected_fraud", "expected_faq": "FAQ-13", "expected_escalation": true},
+  {"id": "UNS-15", "text": "A caller asked me to install an app to fix my KYC and now money is missing from my account.", "expected_intent": "suspected_fraud", "expected_faq": "FAQ-14", "expected_escalation": true},
+  {"id": "UNS-16", "text": "I gave my CVV to someone on a call who said he was from customer care.", "expected_intent": "suspected_fraud", "expected_faq": "FAQ-14", "expected_escalation": true},
+  {"id": "UNS-17", "text": "What paperwork is required to apply for a personal loan if I am self-employed?", "expected_intent": "loan_documents", "expected_faq": "FAQ-15", "expected_escalation": false},
+  {"id": "UNS-18", "text": "How much money is there in my savings account right now?", "expected_intent": "out_of_scope", "expected_faq": null, "expected_escalation": false},
+  {"id": "UNS-19", "text": "Is it a good time to buy gold bonds or should I wait?", "expected_intent": "out_of_scope", "expected_faq": null, "expected_escalation": false},
+  {"id": "UNS-20", "text": "I forgot my net banking password, can you reset my password for me?", "expected_intent": "out_of_scope", "expected_faq": null, "expected_escalation": false}
+]
