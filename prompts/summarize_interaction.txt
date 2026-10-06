@@ -1,0 +1,12 @@
+Write a 2-3 sentence interaction summary for a bank's service record.
+Be factual and neutral. Mention the customer's request, the details given, the guidance used and
+whether escalation was triggered. Do not include any personal data. Do not invent facts.
+
+Customer message (masked): """{message}"""
+Detected intent: {intent}
+Details found: {details}
+Guidance used: {faq}
+Escalation: {escalation}
+Final reply sent by agent: """{final_reply}"""
+
+Respond with the summary text only.
