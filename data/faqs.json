@@ -1,0 +1,430 @@
+[
+  {
+    "id": "FAQ-01",
+    "title": "When will my new debit or credit card arrive?",
+    "intent": "card_delivery",
+    "eligibility": "Customers who have applied for a new, replacement or upgraded card.",
+    "answer": "New and replacement cards are dispatched within 2 working days of approval and normally reach metro addresses in 5-7 working days and other locations in 7-10 working days. A dispatch SMS with the courier tracking number is sent to the registered mobile number.",
+    "steps": [
+      "Check the dispatch SMS for the courier tracking number.",
+      "Track the shipment on the courier website using that number.",
+      "If 10 working days have passed since dispatch, raise a 'Card not received' request (see FAQ-02)."
+    ],
+    "required_documents": [],
+    "escalation_condition": "Escalate if the customer reports the card was delivered but they did not receive it.",
+    "keywords": [
+      "card delivery",
+      "card arrive",
+      "new card",
+      "dispatch",
+      "courier",
+      "tracking",
+      "when will i get my card",
+      "card status",
+      "replacement card",
+      "upgraded card",
+      "where is my card",
+      "ordered",
+      "applied for"
+    ]
+  },
+  {
+    "id": "FAQ-02",
+    "title": "My card has not been received or was returned to the bank",
+    "intent": "card_delivery",
+    "eligibility": "Cards dispatched more than 10 working days ago, or cards returned undelivered by the courier.",
+    "answer": "If a card is not delivered within 10 working days of dispatch, or the courier returns it, the card is held at the issuing branch for 30 days and then destroyed. The customer can ask for re-dispatch to the registered address or collect it from the branch with photo ID.",
+    "steps": [
+      "Confirm the registered address on the account is correct.",
+      "Raise a 'Card not received' service request.",
+      "Choose re-dispatch to the registered address or collection from the issuing branch.",
+      "If collecting from the branch, carry an original photo ID."
+    ],
+    "required_documents": [
+      "Original photo ID (only for branch collection)"
+    ],
+    "escalation_condition": "Escalate if tracking shows 'delivered' but the customer did not receive the card, because the card may need to be blocked.",
+    "keywords": [
+      "not received",
+      "never came",
+      "card returned",
+      "rto",
+      "undelivered",
+      "still waiting for card",
+      "card not delivered",
+      "redispatch",
+      "not arrived"
+    ]
+  },
+  {
+    "id": "FAQ-03",
+    "title": "Why was I charged an annual card fee?",
+    "intent": "fee_explanation",
+    "eligibility": "Debit and credit card holders.",
+    "answer": "Annual card fees are charged in the card anniversary month as per the card's schedule of charges. Some credit cards waive the annual fee when spends in the previous card year cross the published threshold. GST is applied on all fees.",
+    "steps": [
+      "Check the card variant and its schedule of charges.",
+      "Check whether the spend-based waiver applied for the previous card year.",
+      "If the waiver criteria were met and the fee was still charged, raise a fee reversal request."
+    ],
+    "required_documents": [],
+    "escalation_condition": "Escalate to the cards team if the customer met the waiver criteria and the fee was still charged.",
+    "keywords": [
+      "annual fee",
+      "card fee",
+      "yearly charge",
+      "renewal fee",
+      "charged for card",
+      "joining fee",
+      "fee waiver",
+      "gst on fee",
+      "annual charge"
+    ]
+  },
+  {
+    "id": "FAQ-04",
+    "title": "Why was a minimum balance charge deducted from my account?",
+    "intent": "fee_explanation",
+    "eligibility": "Savings account holders.",
+    "answer": "A non-maintenance charge is applied when the average monthly balance falls below the required level for the account variant. The charge is proportional to the shortfall and is shown in the statement as 'AMB charges'.",
+    "steps": [
+      "Confirm the account variant and its required average monthly balance.",
+      "Check the statement entry labelled 'AMB charges' and the month it relates to.",
+      "Explain how the shortfall-based charge is calculated.",
+      "If the account is a zero-balance or salary account, raise a charge review request."
+    ],
+    "required_documents": [],
+    "escalation_condition": "Escalate if a minimum balance charge appears on a zero-balance or salary account.",
+    "keywords": [
+      "minimum balance",
+      "amb",
+      "average monthly balance",
+      "non maintenance",
+      "penalty",
+      "maintenance charge",
+      "balance charge",
+      "amb charges"
+    ]
+  },
+  {
+    "id": "FAQ-05",
+    "title": "What is the foreign currency mark-up fee on my card?",
+    "intent": "fee_explanation",
+    "eligibility": "Card holders who made international or foreign-currency transactions.",
+    "answer": "International and foreign-currency transactions, including online purchases from foreign merchants, carry a currency conversion mark-up as per the card's schedule of charges, plus GST. The mark-up appears as a separate line in the statement.",
+    "steps": [
+      "Identify the foreign-currency transaction in the statement.",
+      "Show the separate mark-up and GST lines linked to it.",
+      "Share the card's published mark-up rate from the schedule of charges."
+    ],
+    "required_documents": [],
+    "escalation_condition": "Escalate if the customer says they did not make the international transaction (treat as suspected fraud).",
+    "keywords": [
+      "forex",
+      "foreign currency",
+      "markup",
+      "mark-up",
+      "international transaction",
+      "dcc",
+      "currency conversion",
+      "usd",
+      "dollar",
+      "extra charge abroad"
+    ]
+  },
+  {
+    "id": "FAQ-06",
+    "title": "How do I update my residential address?",
+    "intent": "address_update",
+    "eligibility": "All account holders with completed KYC.",
+    "answer": "The residential address can be updated online through net banking with a valid address proof upload, or at any branch. The update is completed within 3 working days after document verification, and a confirmation SMS is sent.",
+    "steps": [
+      "Log in to net banking and open 'Update address', or visit any branch.",
+      "Enter the new address exactly as on the address proof.",
+      "Upload or submit a valid address proof.",
+      "Wait for the confirmation SMS within 3 working days."
+    ],
+    "required_documents": [
+      "Valid address proof (Aadhaar, passport, utility bill under 3 months old, or registered rent agreement)"
+    ],
+    "escalation_condition": "Escalate if the customer says the address was changed without their request.",
+    "keywords": [
+      "change address",
+      "update address",
+      "new address",
+      "shifted",
+      "moved",
+      "relocated",
+      "address proof",
+      "kyc address",
+      "residential address",
+      "change my address"
+    ]
+  },
+  {
+    "id": "FAQ-07",
+    "title": "Can I get my card or cheque book sent to a different address?",
+    "intent": "address_update",
+    "eligibility": "Customers awaiting a card or cheque book dispatch.",
+    "answer": "For security, cards and cheque books are sent only to the registered address. To receive them at a new address, the registered address must be updated first (see FAQ-06). Dispatches already in transit cannot be redirected.",
+    "steps": [
+      "Explain that dispatches go only to the registered address.",
+      "Guide the customer to update the registered address first.",
+      "After the update is confirmed, raise a re-dispatch request if needed."
+    ],
+    "required_documents": [
+      "Valid address proof"
+    ],
+    "escalation_condition": "None for informational requests.",
+    "keywords": [
+      "different address",
+      "office address",
+      "communication address",
+      "mailing address",
+      "send card to new address",
+      "cheque book",
+      "redirect",
+      "deliver to my office"
+    ]
+  },
+  {
+    "id": "FAQ-08",
+    "title": "Money was debited but the transfer failed",
+    "intent": "failed_transfer",
+    "eligibility": "Customers whose UPI, IMPS or NEFT transfer failed after the amount was debited.",
+    "answer": "When a transfer fails after debit, the amount is automatically reversed. UPI and IMPS reversals normally complete within 1 working day (T+1) and NEFT reversals within 2 working days. If not reversed in this time, a dispute can be raised with the transaction reference number.",
+    "steps": [
+      "Note the transaction reference number (UTR / RRN) and date.",
+      "Check whether the reversal window (T+1 for UPI/IMPS, 2 working days for NEFT) has passed.",
+      "If the window has passed, raise a failed-transaction dispute with the reference number.",
+      "Share the dispute ticket number with the customer."
+    ],
+    "required_documents": [
+      "Transaction reference number (UTR / RRN)",
+      "Screenshot of the failure message (optional)"
+    ],
+    "escalation_condition": "Escalate if the amount is not reversed 5 working days after the transaction.",
+    "keywords": [
+      "debited",
+      "failed",
+      "not credited",
+      "deducted but",
+      "upi failed",
+      "imps",
+      "neft",
+      "money gone",
+      "refund",
+      "reversal",
+      "transaction failed",
+      "did not receive the money",
+      "not reached",
+      "utr"
+    ]
+  },
+  {
+    "id": "FAQ-09",
+    "title": "How do I check the status of a pending transfer?",
+    "intent": "failed_transfer",
+    "eligibility": "Customers with a transfer showing 'pending' or 'in process'.",
+    "answer": "A pending transfer is still being processed by the receiving bank. Its status can be checked in net banking or the mobile app under 'Transaction history' using the reference number. Most pending transfers settle or reverse within 1 working day.",
+    "steps": [
+      "Open 'Transaction history' in the app or net banking.",
+      "Search using the transaction reference number.",
+      "If still pending after 1 working day, follow FAQ-08."
+    ],
+    "required_documents": [
+      "Transaction reference number"
+    ],
+    "escalation_condition": "None unless the pending period exceeds 5 working days.",
+    "keywords": [
+      "pending",
+      "in process",
+      "processing",
+      "status of transfer",
+      "transfer status",
+      "stuck",
+      "showing pending"
+    ]
+  },
+  {
+    "id": "FAQ-10",
+    "title": "How do I get my account statement?",
+    "intent": "statement_request",
+    "eligibility": "All account holders.",
+    "answer": "Statements for the last 12 months can be downloaded instantly as PDF from net banking or the mobile app. E-statements are also emailed monthly to the registered email ID, with the PDF password shared in the email.",
+    "steps": [
+      "Open 'Accounts' then 'Statement' in the app or net banking.",
+      "Select the date range (up to 12 months).",
+      "Download the PDF or choose 'Email statement'."
+    ],
+    "required_documents": [],
+    "escalation_condition": "None for informational requests.",
+    "keywords": [
+      "statement",
+      "bank statement",
+      "account statement",
+      "e-statement",
+      "passbook",
+      "last 6 months",
+      "download statement",
+      "email statement",
+      "statement pdf"
+    ]
+  },
+  {
+    "id": "FAQ-11",
+    "title": "How do I get an older or attested statement?",
+    "intent": "statement_request",
+    "eligibility": "Account holders needing statements older than 12 months or a bank-attested copy (for visa or loan purposes).",
+    "answer": "Statements older than 12 months, and bank-attested (signed and stamped) statements, are issued by the home branch on a written request. Attested statements are ready within 3 working days and a nominal charge applies as per the schedule of charges.",
+    "steps": [
+      "Submit a statement request at the home branch or through the service request page.",
+      "Specify the exact period and whether attestation is needed.",
+      "Collect the statement from the branch or receive it by courier."
+    ],
+    "required_documents": [
+      "Original photo ID (for branch collection)"
+    ],
+    "escalation_condition": "None for informational requests.",
+    "keywords": [
+      "old statement",
+      "attested",
+      "stamped",
+      "signed statement",
+      "visa",
+      "older statement",
+      "two years",
+      "certified statement",
+      "embassy"
+    ]
+  },
+  {
+    "id": "FAQ-12",
+    "title": "My card is lost or stolen",
+    "intent": "card_loss",
+    "eligibility": "Any card holder whose card is lost, stolen or misplaced.",
+    "answer": "A lost or stolen card must be blocked immediately to prevent misuse. The customer can block it instantly in the mobile app ('Cards' then 'Block card'), through the 24x7 helpline, or by SMS. A replacement card can be requested after blocking.",
+    "steps": [
+      "Hand off to a human agent immediately for card blocking.",
+      "Guide the customer to block the card in the app or through the 24x7 helpline right away.",
+      "Ask the customer to review recent transactions for anything they did not make.",
+      "Request a replacement card after the block is confirmed."
+    ],
+    "required_documents": [
+      "Police report copy (only if the card was stolen and a transaction dispute is raised)"
+    ],
+    "escalation_condition": "Always escalate to a human agent immediately.",
+    "keywords": [
+      "lost",
+      "stolen",
+      "missing card",
+      "misplaced",
+      "can't find my card",
+      "cannot find my card",
+      "wallet",
+      "block card",
+      "card theft",
+      "dropped my card",
+      "block my card",
+      "card is gone",
+      "someone took",
+      "took my card",
+      "atm card"
+    ]
+  },
+  {
+    "id": "FAQ-13",
+    "title": "I see a transaction I did not make",
+    "intent": "suspected_fraud",
+    "eligibility": "Any customer reporting an unauthorised transaction.",
+    "answer": "Unauthorised transactions must be reported immediately. Reporting within 3 working days limits customer liability under the bank's fraud protection policy. The bank will block the affected card or channel and raise a dispute for investigation.",
+    "steps": [
+      "Hand off to a human agent immediately.",
+      "Block the affected card or channel without delay.",
+      "Record the date, amount and merchant of each disputed transaction.",
+      "Raise a fraud dispute and share the reference number.",
+      "Advise the customer to also file a complaint on the national cybercrime portal or helpline."
+    ],
+    "required_documents": [
+      "Signed dispute form",
+      "Police or cybercrime complaint copy (if requested by the fraud team)"
+    ],
+    "escalation_condition": "Always escalate to the fraud team immediately.",
+    "keywords": [
+      "did not make",
+      "didn't make",
+      "not done by me",
+      "unauthorised",
+      "unauthorized",
+      "fraud",
+      "unknown transaction",
+      "someone used my card",
+      "hacked",
+      "never made",
+      "not mine",
+      "i did not do",
+      "debit of",
+      "charged for something"
+    ]
+  },
+  {
+    "id": "FAQ-14",
+    "title": "I shared my OTP or got a suspicious call or message",
+    "intent": "suspected_fraud",
+    "eligibility": "Customers who received phishing calls, SMS or links, or who shared an OTP, PIN or password.",
+    "answer": "The bank never asks for OTP, PIN, CVV or passwords. If any of these were shared, the customer must immediately block cards, change net banking credentials, and report the incident. Suspicious messages can be reported to the bank's fraud desk.",
+    "steps": [
+      "Hand off to a human agent immediately.",
+      "Block the card and reset net banking and UPI credentials.",
+      "Check for any transactions made after the OTP was shared.",
+      "Report the phishing number or link to the fraud desk."
+    ],
+    "required_documents": [],
+    "escalation_condition": "Always escalate if any OTP, PIN, CVV or password was shared.",
+    "keywords": [
+      "otp",
+      "pin",
+      "cvv",
+      "phishing",
+      "suspicious call",
+      "kyc update call",
+      "link",
+      "scam",
+      "someone called",
+      "fake sms",
+      "anydesk",
+      "screen sharing",
+      "claiming to be from the bank"
+    ]
+  },
+  {
+    "id": "FAQ-15",
+    "title": "What documents do I need for a personal loan application?",
+    "intent": "loan_documents",
+    "eligibility": "Customers applying for, or with a pending, personal loan application.",
+    "answer": "A personal loan application needs identity proof, address proof, income proof and recent bank statements. An application stays 'pending documents' until all four are submitted. Approval decisions are made only by the credit team.",
+    "steps": [
+      "Confirm which documents are already submitted for the application.",
+      "List the outstanding documents by type.",
+      "Share the upload option in the app, or the branch option, for submission."
+    ],
+    "required_documents": [
+      "Identity proof (PAN)",
+      "Address proof",
+      "Income proof (last 3 salary slips or ITR)",
+      "Bank statements for the last 6 months"
+    ],
+    "escalation_condition": "Escalate to the loans team for any question about approval, rejection or interest rate.",
+    "keywords": [
+      "loan",
+      "personal loan",
+      "loan documents",
+      "loan application",
+      "salary slip",
+      "itr",
+      "loan pending",
+      "documents for loan",
+      "pending documents"
+    ]
+  }
+]
