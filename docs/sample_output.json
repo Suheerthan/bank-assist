@@ -1,0 +1,525 @@
+[
+  {
+    "analysis_id": "af19b5568c14",
+    "created_at": "2026-10-06T05:34:19+00:00",
+    "message_masked": "Someone used my card XXXX XXXX XXXX 9010 for online shopping. These are not mine.",
+    "pii_masked": [
+      "card number"
+    ],
+    "intent": "suspected_fraud",
+    "intent_label": "Suspected fraud",
+    "confidence": 0.98,
+    "confidence_band": "high",
+    "rationale": "Matched phrases 'someone used my card', 'not mine'; ahead of 'Card loss' by 77%.",
+    "secondary_intent": null,
+    "method": "rules",
+    "details": {
+      "channel": [
+        "online shopping"
+      ],
+      "card": [
+        "card ending 9010"
+      ]
+    },
+    "escalation": {
+      "escalate": true,
+      "level": "critical",
+      "reasons": [
+        {
+          "rule": "Unauthorised transaction",
+          "team": "Fraud response team",
+          "level": "critical",
+          "matched": "someone used",
+          "intent": "suspected_fraud",
+          "faq": "FAQ-13"
+        }
+      ]
+    },
+    "sentiment": {
+      "score": 0.0,
+      "label": "calm",
+      "signals": [],
+      "suggested_tone": "standard"
+    },
+    "sources": [
+      {
+        "id": "FAQ-13",
+        "title": "I see a transaction I did not make",
+        "intent": "suspected_fraud",
+        "score": 0.909,
+        "keyword_hits": [
+          "someone used my card",
+          "not mine"
+        ],
+        "rule_pinned": true
+      },
+      {
+        "id": "FAQ-14",
+        "title": "I shared my OTP or got a suspicious call or message",
+        "intent": "suspected_fraud",
+        "score": 0.158,
+        "keyword_hits": []
+      },
+      {
+        "id": "FAQ-12",
+        "title": "My card is lost or stolen",
+        "intent": "card_loss",
+        "score": 0.042,
+        "keyword_hits": []
+      }
+    ],
+    "faq_match": true,
+    "faq": {
+      "id": "FAQ-13",
+      "title": "I see a transaction I did not make",
+      "intent": "suspected_fraud",
+      "eligibility": "Any customer reporting an unauthorised transaction.",
+      "answer": "Unauthorised transactions must be reported immediately. Reporting within 3 working days limits customer liability under the bank's fraud protection policy. The bank will block the affected card or channel and raise a dispute for investigation.",
+      "steps": [
+        "Hand off to a human agent immediately.",
+        "Block the affected card or channel without delay.",
+        "Record the date, amount and merchant of each disputed transaction.",
+        "Raise a fraud dispute and share the reference number.",
+        "Advise the customer to also file a complaint on the national cybercrime portal or helpline."
+      ],
+      "required_documents": [
+        "Signed dispute form",
+        "Police or cybercrime complaint copy (if requested by the fraud team)"
+      ],
+      "escalation_condition": "Always escalate to the fraud team immediately.",
+      "keywords": [
+        "did not make",
+        "didn't make",
+        "not done by me",
+        "unauthorised",
+        "unauthorized",
+        "fraud",
+        "unknown transaction",
+        "someone used my card",
+        "hacked",
+        "never made",
+        "not mine",
+        "i did not do",
+        "debit of",
+        "charged for something"
+      ]
+    },
+    "no_match_reason": null,
+    "tone": "standard",
+    "draft": "Hello,\n\nBecause this needs urgent attention, I'm connecting you with our fraud response team now. Unauthorised transactions must be reported immediately. Reporting within 3 working days limits customer liability under the bank's fraud protection policy. The bank will block the affected card or channel and raise a dispute for investigation.\n\nPlease keep these ready:\n- Signed dispute form\n- Police or cybercrime complaint copy (if requested by the fraud team)\n\nPlease let us know if you need anything else.",
+    "draft_source": "template",
+    "compliance": {
+      "status": "pass",
+      "issues": []
+    },
+    "next_steps": [
+      "Hand off to a human agent immediately.",
+      "Block the affected card or channel without delay.",
+      "Record the date, amount and merchant of each disputed transaction.",
+      "Raise a fraud dispute and share the reference number.",
+      "Advise the customer to also file a complaint on the national cybercrime portal or helpline."
+    ],
+    "required_documents": [
+      "Signed dispute form",
+      "Police or cybercrime complaint copy (if requested by the fraud team)"
+    ],
+    "clarifying_question": "Could you share the date and amount of each transaction you don't recognise?",
+    "engine": "Offline rules + templates",
+    "latency_ms": 11
+  },
+  {
+    "analysis_id": "c7f102b9dc61",
+    "created_at": "2026-10-06T05:34:19+00:00",
+    "message_masked": "I sent Rs 5,000 by UPI yesterday. Money got debited but my friend did not receive the money. UTR 412398765432.",
+    "pii_masked": [],
+    "intent": "failed_transfer",
+    "intent_label": "Failed or pending transfer",
+    "confidence": 0.98,
+    "confidence_band": "high",
+    "rationale": "Matched phrases 'debited', 'did not receive the money', 'utr'; ahead of 'Address update' by 84%.",
+    "secondary_intent": null,
+    "method": "rules",
+    "details": {
+      "amounts_inr": [
+        "5000"
+      ],
+      "reference_numbers": [
+        "412398765432"
+      ],
+      "channel": [
+        "UPI"
+      ],
+      "timing": [
+        "yesterday"
+      ]
+    },
+    "escalation": {
+      "escalate": false,
+      "level": "none",
+      "reasons": []
+    },
+    "sentiment": {
+      "score": 0.0,
+      "label": "calm",
+      "signals": [],
+      "suggested_tone": "standard"
+    },
+    "sources": [
+      {
+        "id": "FAQ-08",
+        "title": "Money was debited but the transfer failed",
+        "intent": "failed_transfer",
+        "score": 0.992,
+        "keyword_hits": [
+          "debited",
+          "did not receive the money",
+          "utr"
+        ]
+      },
+      {
+        "id": "FAQ-07",
+        "title": "Can I get my card or cheque book sent to a different address?",
+        "intent": "address_update",
+        "score": 0.045,
+        "keyword_hits": []
+      },
+      {
+        "id": "FAQ-01",
+        "title": "When will my new debit or credit card arrive?",
+        "intent": "card_delivery",
+        "score": 0.032,
+        "keyword_hits": []
+      }
+    ],
+    "faq_match": true,
+    "faq": {
+      "id": "FAQ-08",
+      "title": "Money was debited but the transfer failed",
+      "intent": "failed_transfer",
+      "eligibility": "Customers whose UPI, IMPS or NEFT transfer failed after the amount was debited.",
+      "answer": "When a transfer fails after debit, the amount is automatically reversed. UPI and IMPS reversals normally complete within 1 working day (T+1) and NEFT reversals within 2 working days. If not reversed in this time, a dispute can be raised with the transaction reference number.",
+      "steps": [
+        "Note the transaction reference number (UTR / RRN) and date.",
+        "Check whether the reversal window (T+1 for UPI/IMPS, 2 working days for NEFT) has passed.",
+        "If the window has passed, raise a failed-transaction dispute with the reference number.",
+        "Share the dispute ticket number with the customer."
+      ],
+      "required_documents": [
+        "Transaction reference number (UTR / RRN)",
+        "Screenshot of the failure message (optional)"
+      ],
+      "escalation_condition": "Escalate if the amount is not reversed 5 working days after the transaction.",
+      "keywords": [
+        "debited",
+        "failed",
+        "not credited",
+        "deducted but",
+        "upi failed",
+        "imps",
+        "neft",
+        "money gone",
+        "refund",
+        "reversal",
+        "transaction failed",
+        "did not receive the money",
+        "not reached",
+        "utr"
+      ]
+    },
+    "no_match_reason": null,
+    "tone": "standard",
+    "draft": "Hello,\n\nWhen a transfer fails after debit, the amount is automatically reversed. UPI and IMPS reversals normally complete within 1 working day (T+1) and NEFT reversals within 2 working days. If not reversed in this time, a dispute can be raised with the transaction reference number.\n\nPlease keep these ready:\n- Transaction reference number (UTR / RRN)\n- Screenshot of the failure message (optional)\n\nPlease let us know if you need anything else.",
+    "draft_source": "template",
+    "compliance": {
+      "status": "pass",
+      "issues": []
+    },
+    "next_steps": [
+      "Note the transaction reference number (UTR / RRN) and date.",
+      "Check whether the reversal window (T+1 for UPI/IMPS, 2 working days for NEFT) has passed.",
+      "If the window has passed, raise a failed-transaction dispute with the reference number.",
+      "Share the dispute ticket number with the customer."
+    ],
+    "required_documents": [
+      "Transaction reference number (UTR / RRN)",
+      "Screenshot of the failure message (optional)"
+    ],
+    "clarifying_question": null,
+    "engine": "Offline rules + templates",
+    "latency_ms": 2
+  },
+  {
+    "analysis_id": "3fb3669ec44d",
+    "created_at": "2026-10-06T05:34:19+00:00",
+    "message_masked": "What is my current account balance?",
+    "pii_masked": [],
+    "intent": "out_of_scope",
+    "intent_label": "Out of scope",
+    "confidence": 0.9,
+    "confidence_band": "high",
+    "rationale": "Out-of-scope rule: Balance enquiry needs authenticated access (matched 'account balance').",
+    "secondary_intent": null,
+    "method": "rules",
+    "details": {},
+    "escalation": {
+      "escalate": false,
+      "level": "none",
+      "reasons": []
+    },
+    "sentiment": {
+      "score": 0.0,
+      "label": "calm",
+      "signals": [],
+      "suggested_tone": "standard"
+    },
+    "sources": [],
+    "faq_match": false,
+    "faq": null,
+    "no_match_reason": null,
+    "tone": "standard",
+    "draft": "Hello,\n\nFor your security, balances can only be shared after you log in to the mobile app or net banking, or at a branch after verification.\n\nPlease let us know if you need anything else.",
+    "draft_source": "template",
+    "compliance": {
+      "status": "pass",
+      "issues": []
+    },
+    "next_steps": [
+      "Explain the request is outside what this assistant can handle.",
+      "Guide the customer to the secure self-service channel or branch."
+    ],
+    "required_documents": [],
+    "clarifying_question": null,
+    "engine": "Offline rules + templates",
+    "latency_ms": 0
+  },
+  {
+    "analysis_id": "e399faf37cfa",
+    "created_at": "2026-10-06T05:34:19+00:00",
+    "message_masked": "My UPI transfer failed and money was debited, also I need my bank statement for 6 months",
+    "pii_masked": [],
+    "intent": "failed_transfer",
+    "intent_label": "Failed or pending transfer",
+    "confidence": 0.86,
+    "confidence_band": "high",
+    "rationale": "Matched phrases 'debited', 'failed'; ahead of 'Statement request' by 42%.",
+    "secondary_intent": {
+      "intent": "statement_request",
+      "label": "Statement request",
+      "evidence": [
+        "statement",
+        "bank statement"
+      ]
+    },
+    "method": "rules",
+    "details": {
+      "channel": [
+        "UPI"
+      ]
+    },
+    "escalation": {
+      "escalate": false,
+      "level": "none",
+      "reasons": []
+    },
+    "sentiment": {
+      "score": 0.0,
+      "label": "calm",
+      "signals": [],
+      "suggested_tone": "standard"
+    },
+    "sources": [
+      {
+        "id": "FAQ-08",
+        "title": "Money was debited but the transfer failed",
+        "intent": "failed_transfer",
+        "score": 0.985,
+        "keyword_hits": [
+          "debited",
+          "failed"
+        ]
+      },
+      {
+        "id": "FAQ-10",
+        "title": "How do I get my account statement?",
+        "intent": "statement_request",
+        "score": 0.385,
+        "keyword_hits": [
+          "statement",
+          "bank statement"
+        ]
+      },
+      {
+        "id": "FAQ-09",
+        "title": "How do I check the status of a pending transfer?",
+        "intent": "failed_transfer",
+        "score": 0.101,
+        "keyword_hits": []
+      }
+    ],
+    "faq_match": true,
+    "faq": {
+      "id": "FAQ-08",
+      "title": "Money was debited but the transfer failed",
+      "intent": "failed_transfer",
+      "eligibility": "Customers whose UPI, IMPS or NEFT transfer failed after the amount was debited.",
+      "answer": "When a transfer fails after debit, the amount is automatically reversed. UPI and IMPS reversals normally complete within 1 working day (T+1) and NEFT reversals within 2 working days. If not reversed in this time, a dispute can be raised with the transaction reference number.",
+      "steps": [
+        "Note the transaction reference number (UTR / RRN) and date.",
+        "Check whether the reversal window (T+1 for UPI/IMPS, 2 working days for NEFT) has passed.",
+        "If the window has passed, raise a failed-transaction dispute with the reference number.",
+        "Share the dispute ticket number with the customer."
+      ],
+      "required_documents": [
+        "Transaction reference number (UTR / RRN)",
+        "Screenshot of the failure message (optional)"
+      ],
+      "escalation_condition": "Escalate if the amount is not reversed 5 working days after the transaction.",
+      "keywords": [
+        "debited",
+        "failed",
+        "not credited",
+        "deducted but",
+        "upi failed",
+        "imps",
+        "neft",
+        "money gone",
+        "refund",
+        "reversal",
+        "transaction failed",
+        "did not receive the money",
+        "not reached",
+        "utr"
+      ]
+    },
+    "no_match_reason": null,
+    "tone": "standard",
+    "draft": "Hello,\n\nWhen a transfer fails after debit, the amount is automatically reversed. UPI and IMPS reversals normally complete within 1 working day (T+1) and NEFT reversals within 2 working days. If not reversed in this time, a dispute can be raised with the transaction reference number.\n\nPlease keep these ready:\n- Transaction reference number (UTR / RRN)\n- Screenshot of the failure message (optional)\n\nPlease let us know if you need anything else.",
+    "draft_source": "template",
+    "compliance": {
+      "status": "pass",
+      "issues": []
+    },
+    "next_steps": [
+      "Note the transaction reference number (UTR / RRN) and date.",
+      "Check whether the reversal window (T+1 for UPI/IMPS, 2 working days for NEFT) has passed.",
+      "If the window has passed, raise a failed-transaction dispute with the reference number.",
+      "Share the dispute ticket number with the customer."
+    ],
+    "required_documents": [
+      "Transaction reference number (UTR / RRN)",
+      "Screenshot of the failure message (optional)"
+    ],
+    "clarifying_question": "Could you share the transaction reference number (UTR) and the date of the transfer?",
+    "engine": "Offline rules + templates",
+    "latency_ms": 2
+  },
+  {
+    "analysis_id": "36b3fa761074",
+    "created_at": "2026-10-06T05:34:19+00:00",
+    "message_masked": "Tracking says delivered but I never got the card",
+    "pii_masked": [],
+    "intent": "card_delivery",
+    "intent_label": "Card delivery",
+    "confidence": 0.88,
+    "confidence_band": "high",
+    "rationale": "Matched phrases 'tracking'; ahead of 'Address update' by 59%.",
+    "secondary_intent": null,
+    "method": "rules",
+    "details": {},
+    "escalation": {
+      "escalate": true,
+      "level": "high",
+      "reasons": [
+        {
+          "rule": "Card marked delivered but not received",
+          "team": "Cards operations",
+          "level": "high",
+          "matched": "delivered but",
+          "intent": "card_delivery",
+          "faq": "FAQ-02"
+        }
+      ]
+    },
+    "sentiment": {
+      "score": 0.0,
+      "label": "calm",
+      "signals": [],
+      "suggested_tone": "standard"
+    },
+    "sources": [
+      {
+        "id": "FAQ-02",
+        "title": "My card has not been received or was returned to the bank",
+        "intent": "card_delivery",
+        "score": 0.743,
+        "keyword_hits": [],
+        "rule_pinned": true
+      },
+      {
+        "id": "FAQ-01",
+        "title": "When will my new debit or credit card arrive?",
+        "intent": "card_delivery",
+        "score": 0.743,
+        "keyword_hits": [
+          "tracking"
+        ]
+      },
+      {
+        "id": "FAQ-07",
+        "title": "Can I get my card or cheque book sent to a different address?",
+        "intent": "address_update",
+        "score": 0.082,
+        "keyword_hits": []
+      }
+    ],
+    "faq_match": true,
+    "faq": {
+      "id": "FAQ-02",
+      "title": "My card has not been received or was returned to the bank",
+      "intent": "card_delivery",
+      "eligibility": "Cards dispatched more than 10 working days ago, or cards returned undelivered by the courier.",
+      "answer": "If a card is not delivered within 10 working days of dispatch, or the courier returns it, the card is held at the issuing branch for 30 days and then destroyed. The customer can ask for re-dispatch to the registered address or collect it from the branch with photo ID.",
+      "steps": [
+        "Confirm the registered address on the account is correct.",
+        "Raise a 'Card not received' service request.",
+        "Choose re-dispatch to the registered address or collection from the issuing branch.",
+        "If collecting from the branch, carry an original photo ID."
+      ],
+      "required_documents": [
+        "Original photo ID (only for branch collection)"
+      ],
+      "escalation_condition": "Escalate if tracking shows 'delivered' but the customer did not receive the card, because the card may need to be blocked.",
+      "keywords": [
+        "not received",
+        "never came",
+        "card returned",
+        "rto",
+        "undelivered",
+        "still waiting for card",
+        "card not delivered",
+        "redispatch",
+        "not arrived"
+      ]
+    },
+    "no_match_reason": null,
+    "tone": "standard",
+    "draft": "Hello,\n\nBecause this needs urgent attention, I'm connecting you with our cards operations now. If a card is not delivered within 10 working days of dispatch, or the courier returns it, the card is held at the issuing branch for 30 days and then destroyed. The customer can ask for re-dispatch to the registered address or collect it from the branch with photo ID.\n\nPlease keep these ready:\n- Original photo ID (only for branch collection)\n\nPlease let us know if you need anything else.",
+    "draft_source": "template",
+    "compliance": {
+      "status": "pass",
+      "issues": []
+    },
+    "next_steps": [
+      "Confirm the registered address on the account is correct.",
+      "Raise a 'Card not received' service request.",
+      "Choose re-dispatch to the registered address or collection from the issuing branch.",
+      "If collecting from the branch, carry an original photo ID."
+    ],
+    "required_documents": [
+      "Original photo ID (only for branch collection)"
+    ],
+    "clarifying_question": null,
+    "engine": "Offline rules + templates",
+    "latency_ms": 1
+  }
+]
